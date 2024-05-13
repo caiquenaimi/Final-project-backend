@@ -4,9 +4,7 @@ async function getAllUsers(req, res) {
   try {
     const result = await pool.query("SELECT * FROM users");
     res.status(200).json({
-      status: "success",
-      message: "Lista de usuários",
-      quantity: result.rowCount,
+      total: result.rowCount,
       users: result.rows,
     });
   } catch (error) {
@@ -88,9 +86,7 @@ async function deleteUser(req, res) {
 
   try {
     await pool.query("DELETE FROM users WHERE id = $1", [id]);
-    res.status(204).send(
-      `Usuário com id ${id} deletado com sucesso`
-    );
+    res.status(204).send(`Usuário com id ${id} deletado com sucesso`);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
