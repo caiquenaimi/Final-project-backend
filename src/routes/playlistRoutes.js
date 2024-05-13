@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const albumController = require("../controllers/albumController");
+const playlistController = require("../controllers/playlistController");
 
-router.get("/", albumController.getAllAlbums);
-router.get("/:name", albumController.getAlbumByName);
-router.post("/", albumController.createAlbum);
-router.put("/:id", albumController.updateAlbum);
-router.delete("/:id", albumController.deleteAlbum);
+router.get("/playlist", playlistController.getAllPlaylists);
+router.get("/playlist/:name", playlistController.getPlaylistByName);
+router.post("/playlist", playlistController.createPlaylist);
+router.put("/playlist/:id", playlistController.updatePlaylist);
+router.delete("/playlist/:id", playlistController.deletePlaylist);
+
 
 module.exports = router;

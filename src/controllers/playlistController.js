@@ -77,6 +77,23 @@ async function updatePlaylist(req, res) {
   }
 };
 
+async function deletePlaylist(req, res) {
+  try {
+    const { id } = req.params;
+    await pool.query("DELETE FROM playlists WHERE id = $1", [id]);
+    res.status(200).json({
+      status: "success",
+      message: `Playlist com id ${id} deletada com sucesso`,
+    });
+  } catch (error) {
+    console.error("Erro ao deletar playlist", error);
+    res.status(500).json({
+      status: "error",
+      message: "Erro ao deletar playlist",
+    });
+  }
+}
+
 module.exports = {
   getAllPlaylists,
   getPlaylistByName,
