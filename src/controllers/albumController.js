@@ -1,75 +1,81 @@
 const pool = require("../config/dbConfig");
 
 async function getAllAlbums(req, res) {
-  const query = `SELECT * FROM albums`;
-
   try {
-    const result = await pool.query(query);
-    res.status(200).json(result.rows);
+    const result = await pool.query(`SELECT * FROM albums`);
+    res.json({
+      total: result.rows.length,
+      data: result.rows,
+    });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
 }
 
 async function getAlbumByName(req, res) {
   const { name } = req.params;
-  const query = `SELECT * FROM albums WHERE name = $1`;
-
   try {
-    const result = await pool.query(query, [name]);
-    res.status(200).json(result.rows);
+    const result = await pool.query(`SELECT * FROM albums WHERE name = $1`, [
+      name,
+    ]);
+    res.json({
+      total: result.rows.length,
+      data: result.rows,
+    });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
 }
 
 async function createAlbum(req, res) {
-  const { name, image, artist_id, release_year } = req.body;
-  const query = `INSERT INTO albums (name, image, artist_id, release_year) VALUES ($1, $2, $3, $4) RETURNING *`;
-
+  const { name, artist_id } = req.body;
   try {
-    const result = await pool.query(query, [
-      name,
-      image,
-      artist_id,
-      release_year,
-    ]);
-    res.status(201).json(result.rows[0]);
+    const result = await pool.query(
+      `INSERT INTO albums (name, artist_id) VALUES ($1, $2) RETURNING *`,
+      [name, artist_id]
+    );
+    res.json({
+      message: "Album created successfully",
+      data: result.rows[0],
+    });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
 }
 
-updateAlbum = async (req, res) => {
-  const { name, image, artist_id, release_year } = req.body;
+async function updateAlbum(req, res) {
+  const { name, artist_id } = req.body;
   const { id } = req.params;
-  const query = `UPDATE albums SET name = $1, image = $2, artist_id = $3, release_year = $4 WHERE id = $5 RETURNING *`;
 
   try {
-    const result = await pool.query(query, [
-      name,
-      image,
-      artist_id,
-      release_year,
-      id,
-    ]);
-    res.status(200).json(result.rows[0]);
+    const result = await pool.query(
+      `UPDATE albums SET name = $1, artist_id = $2 WHERE id = $3 RETURNING *`,
+      [name, artist_id, id]
+    );
+    res.json({
+      message: "Album updated successfully",
+      data: result.rows[0],
+    });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
-};
+}
 
-deleteAlbum = async (req, res) => {
+async function deleteAlbum(req, res) {
   const { id } = req.params;
-  const query = `DELETE FROM albums WHERE id = $1`;
 
   try {
-    await pool.query(query, [id]);
-    res.status(204).send();
+    const result = await pool.query(`DELETE FROM albums WHERE id = $1`, [id]);
+    res.json({ message: "Album deleted successfully" });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
-};
+}
 
 module.exports = {
   getAllAlbums,

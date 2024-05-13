@@ -1,64 +1,81 @@
 const pool = require("../config/dbConfig");
 
 async function getAllGenres(req, res) {
-  const query = `SELECT * FROM genres`;
-
   try {
-    const result = await pool.query(query);
-    res.status(200).json(result.rows);
+    const result = await pool.query(`SELECT * FROM genres`);
+    res.json({
+      total: result.rows.length,
+      data: result.rows,
+    });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
 }
 
 async function getGenreByName(req, res) {
   const { name } = req.params;
-  const query = `SELECT * FROM genres WHERE name = $1`;
-
   try {
-    const result = await pool.query(query, [name]);
-    res.status(200).json(result.rows);
+    const result = await pool.query(`SELECT * FROM genres WHERE name = $1`, [
+      name,
+    ]);
+    res.json({
+      total: result.rows.length,
+      data: result.rows,
+    });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
 }
 
 async function createGenre(req, res) {
   const { name } = req.body;
-  const query = `INSERT INTO genres (name) VALUES ($1) RETURNING *`;
-
   try {
-    const result = await pool.query(query, [name]);
-    res.status(201).json(result.rows[0]);
+    const result = await pool.query(
+      `INSERT INTO genres (name) VALUES ($1) RETURNING *`,
+      [name]
+    );
+    res.json({
+      message: "Genre created successfully",
+      data: result.rows[0],
+    });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
 }
 
-updateGenre = async (req, res) => {
+async function updateGenre(req, res) {
   const { name } = req.body;
   const { id } = req.params;
-  const query = `UPDATE genres SET name = $1 WHERE id = $3 RETURNING *`;
 
   try {
-    const result = await pool.query(query, [name, id]);
-    res.status(200).json(result.rows[0]);
+    const result = await pool.query(
+      `UPDATE genres SET name = $1 WHERE id = $2 RETURNING *`,
+      [name, id]
+    );
+    res.json({
+      message: "Genre updated successfully",
+      data: result.rows[0],
+    });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
-};
+}
 
-deleteGenre = async (req, res) => {
+async function deleteGenre(req, res) {
   const { id } = req.params;
-  const query = `DELETE FROM genres WHERE id = $1`;
 
   try {
-    await pool.query(query, [id]);
-    res.status(204).send();
+    const result = await pool.query(`DELETE FROM genres WHERE id = $1`, [id]);
+    res.json({ message: "Genre deleted successfully" });
   } catch (error) {
+    console.error("Error executing query", error);
     res.status(500).json({ error: error.message });
   }
-};
+}
 
 module.exports = {
   getAllGenres,
