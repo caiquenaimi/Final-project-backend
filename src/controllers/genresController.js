@@ -24,11 +24,11 @@ async function getGenreByName(req, res) {
 }
 
 async function createGenre(req, res) {
-  const { name, description } = req.body;
-  const query = `INSERT INTO genres (name, description) VALUES ($1, $2) RETURNING *`;
+  const { name } = req.body;
+  const query = `INSERT INTO genres (name) VALUES ($1) RETURNING *`;
 
   try {
-    const result = await pool.query(query, [name, description]);
+    const result = await pool.query(query, [name]);
     res.status(201).json(result.rows[0]);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -36,12 +36,12 @@ async function createGenre(req, res) {
 }
 
 updateGenre = async (req, res) => {
-  const { name, description } = req.body;
+  const { name } = req.body;
   const { id } = req.params;
-  const query = `UPDATE genres SET name = $1, description = $2 WHERE id = $3 RETURNING *`;
+  const query = `UPDATE genres SET name = $1 WHERE id = $3 RETURNING *`;
 
   try {
-    const result = await pool.query(query, [name, description, id]);
+    const result = await pool.query(query, [name, id]);
     res.status(200).json(result.rows[0]);
   } catch (error) {
     res.status(500).json({ error: error.message });

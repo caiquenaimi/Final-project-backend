@@ -24,11 +24,16 @@ async function getAlbumByName(req, res) {
 }
 
 async function createAlbum(req, res) {
-  const { name, description } = req.body;
-  const query = `INSERT INTO albums (name, description) VALUES ($1, $2) RETURNING *`;
+  const { name, image, artist_id, release_year } = req.body;
+  const query = `INSERT INTO albums (name, image, artist_id, release_year) VALUES ($1, $2, $3, $4) RETURNING *`;
 
   try {
-    const result = await pool.query(query, [name, description]);
+    const result = await pool.query(query, [
+      name,
+      image,
+      artist_id,
+      release_year,
+    ]);
     res.status(201).json(result.rows[0]);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -36,12 +41,18 @@ async function createAlbum(req, res) {
 }
 
 updateAlbum = async (req, res) => {
-  const { name, description } = req.body;
+  const { name, image, artist_id, release_year } = req.body;
   const { id } = req.params;
-  const query = `UPDATE albums SET name = $1, description = $2 WHERE id = $3 RETURNING *`;
+  const query = `UPDATE albums SET name = $1, image = $2, artist_id = $3, release_year = $4 WHERE id = $5 RETURNING *`;
 
   try {
-    const result = await pool.query(query, [name, description, id]);
+    const result = await pool.query(query, [
+      name,
+      image,
+      artist_id,
+      release_year,
+      id,
+    ]);
     res.status(200).json(result.rows[0]);
   } catch (error) {
     res.status(500).json({ error: error.message });
