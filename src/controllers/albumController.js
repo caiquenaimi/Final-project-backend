@@ -69,7 +69,7 @@ async function deleteAlbum(req, res) {
   const { id } = req.params;
 
   try {
-    const result = await pool.query(`DELETE FROM albums WHERE id = $1`, [id]);
+    await pool.query(`DELETE FROM albums WHERE id = $1`, [id]);
     res.json({ message: "Album deleted successfully" });
   } catch (error) {
     console.error("Error executing query", error);
