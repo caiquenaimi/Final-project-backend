@@ -16,9 +16,10 @@ async function getAllMembers(req, res) {
 async function getMemberByName(req, res) {
   const { name } = req.params;
   try {
-    const result = await pool.query(`SELECT * FROM members WHERE name = $1`, [
-      name,
-    ]);
+    const result = await pool.query(
+      `SELECT * FROM members WHERE name LIKE $1`,
+      [`%${name}%`]
+    );
     res.json({
       total: result.rows.length,
       data: result.rows,
@@ -36,6 +37,7 @@ async function createMember(req, res) {
       `INSERT INTO members (name, description, birthdate, image) VALUES ($1, $2, $3, $4)`,
       [name, description, birthdate, image]
     );
+    res.status(201).json({ message: "Member created successfully" });
   } catch (error) {
     console.error("Error create member", error);
     res.status(500).json({ error: error.message });
@@ -51,6 +53,7 @@ async function updateMember(req, res) {
       `UPDATE members SET name = $1, description = $2, birthdate = $3, image = $4 WHERE id = $5`,
       [name, description, birthdate, image, id]
     );
+    res.json({ message: "Member updated successfully" });
   } catch (error) {
     console.error("Error update member", error);
     res.status(500).json({ error: error.message });
