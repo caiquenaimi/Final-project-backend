@@ -44,5 +44,6 @@ CREATE TABLE playlists (
 CREATE TABLE members (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    birthdate DATE NOT NULL,
     description TEXT
 );
