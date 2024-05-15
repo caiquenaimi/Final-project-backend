@@ -47,9 +47,12 @@ async function getPlaylistByName(req, res) {
 
 
 async function createPlaylist(req, res) {
-  const { name, description } = req.body;
+  const { name, description, duration, user_id } = req.body;
   try {
-    await pool.query("INSERT INTO playlists (name, description) VALUES ($1, $2)", [name, description]);
+    await pool.query(
+      "INSERT INTO playlists (name, description, duration, user_id) VALUES ($1, $2, $3, $4)",
+      [name, description, duration, user_id]
+    );
     res.status(201).json({
       status: "success",
       message: "Playlist criada com sucesso",
@@ -94,10 +97,35 @@ async function deletePlaylist(req, res) {
   }
 }
 
+async function getPlaylistDetails(req, res) {
+  const playlistId = req.params.playlistId;
+
+  try {
+    const playlistResult = await pool.query(
+      "SELECT * FROM playlists WHERE id = $1",
+      [playlistId]
+    );
+
+    const musicResult = await pool.query(
+      "SELECT * FROM musics INNER JOIN playlist_music ON musics.id = playlist_music.music_id WHERE playlist_music.playlist_id = $1",
+      [playlistId]
+    );
+
+    const playlist = playlistResult.rows[0];
+    const musics = musicResult.rows;
+
+    res.status(200).json({ playlist, musics });
+  } catch (error) {
+    console.error("Error getting playlist details:", error);
+    res.status(500).json({ error: error.message });
+  }
+}
+
 module.exports = {
   getAllPlaylists,
   getPlaylistByName,
   createPlaylist,
   updatePlaylist,
   deletePlaylist,
+  getPlaylistDetails,
 };

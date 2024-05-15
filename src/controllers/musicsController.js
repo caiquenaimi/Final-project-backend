@@ -50,7 +50,7 @@ async function createMusic(req, res) {
   const { name, image, duration, file, album, artist } = req.body;
   try {
     await pool.query(
-      "INSERT INTO musics (name, image, duration, file, album_id, artist_id) VALUES ($1, $2, $3, $4, $5, $6)",
+      "INSERT INTO musics (name, image, duration, file, album, artist) VALUES ($1, $2, $3, $4, $5, $6)",
       [name, image, duration, file, album, artist]
     );
     res.status(201).json({
@@ -71,7 +71,7 @@ async function updateMusic(req, res) {
   try {
     const { id } = req.params;
     await pool.query(
-      "UPDATE musics SET name = $1, image = $2, duration = $3, file = $4, album_id = $5, artist_id = $6 WHERE id = $7",
+      "UPDATE musics SET name = $1, image = $2, duration = $3, file = $4, album = $5, artist = $6 WHERE id = $7",
       [name, image, duration, file, album, artist, id]
     );
     res.json({
@@ -119,7 +119,6 @@ async function addMusicToPlaylist(req, res) {
 
 async function removeMusicFromPlaylist(req, res) {
   const { playlistId, musicId } = req.body;
-
   try {
     await musicModel.removeMusicFromPlaylist(playlistId, musicId);
     res.status(204).send();
