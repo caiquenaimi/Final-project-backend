@@ -47,11 +47,11 @@ async function getMusicByName(req, res) {
 }
 
 async function createMusic(req, res) {
-  const { name, image, album_id, duration, genre_id } = req.body;
+  const { name, image, duration, file, album ,artist } = req.body;
   try {
     await pool.query(
-      "INSERT INTO musics (name, image, album_id, duration, genre_id) VALUES ($1, $2, $3, $4, $5)",
-      [name, image, album_id, duration, genre_id]
+      "INSERT INTO musics (name, image, duration, file, album_id, artist_id) VALUES ($1, $2, $3, $4, $5, $6)",
+      [name, image, duration, file, album, artist]
     );
     res.status(201).json({
       status: "success",
@@ -67,12 +67,12 @@ async function createMusic(req, res) {
 }
 
 async function updateMusic(req, res) {
+  const { name, image, duration, file , album , artist } = req.body;
   try {
-    const { name, image, album_id, duration, genre_id } = req.body;
     const { id } = req.params;
     await pool.query(
-      "UPDATE musics SET name = $1, image = $2, album_id = $3, duration = $4, genre_id = $5 WHERE id = $6",
-      [name, image, album_id, duration, genre_id, id]
+      "UPDATE musics SET name = $1, image = $2, duration = $3, file = $4, album_id = $5, artist_id = $6 WHERE id = $7",
+      [name, image, duration, file, album, artist, id]
     );
     res.json({
       status: "success",
