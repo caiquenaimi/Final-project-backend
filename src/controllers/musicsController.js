@@ -118,11 +118,11 @@ async function addMusicToPlaylist(req, res) {
 }
 
 async function removeMusicFromPlaylist(req, res) {
-  const { playlistId, musicId } = req.params;
+  const { playlistId, id } = req.params;
   try {
-    await musicModel.removeMusicFromPlaylist(playlistId, musicId);
+    await musicModel.removeMusicFromPlaylist(playlistId, id);
     res.status(200).json({ message: 'Music removed from playlist successfully' }
-    );
+    ); 
   } catch (error) {
     console.error("Error removing music from playlist:", error);
     res.status(500).json({ error: error.message });

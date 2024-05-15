@@ -11,11 +11,11 @@ async function addMusicToPlaylist(playlistId, musicId) {
   }
 }
 
-async function removeMusicFromPlaylist(playlistId, musicId) {
+async function removeMusicFromPlaylist(playlistId, id) {
   try {
     await pool.query(
-      "DELETE FROM playlist_music WHERE playlist_id = $1 AND music_id = $2",
-      [playlistId, musicId]
+      "DELETE FROM playlist_music WHERE playlist_id = $1 AND id = $2",
+      [playlistId, id]
     );
   } catch (error) {
     throw new Error(error.message);

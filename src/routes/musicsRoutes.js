@@ -8,6 +8,6 @@ router.post("/musics", musicsController.createMusic);
 router.put("/musics/:id", musicsController.updateMusic);
 router.delete("/musics/:id", musicsController.deleteMusic);
 router.post("/playlist/:playlistId/musics", musicsController.addMusicToPlaylist);
-router.delete("/playlist/:playlistId/musics/:musicId", musicsController.removeMusicFromPlaylist);
+router.delete("/playlist/:playlistId/musics/:id", musicsController.removeMusicFromPlaylist);
 
 module.exports = router;
