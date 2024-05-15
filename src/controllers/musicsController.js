@@ -3,7 +3,7 @@ const musicModel = require("../models/musicModel");
 
 async function getAllMusics(req, res) {
   try {
-    await pool.query("SELECT * FROM musics");
+    const result = await pool.query("SELECT * FROM musics");
     res.status(200).json({
       status: "success",
       message: "Lista de músicas",
@@ -47,7 +47,7 @@ async function getMusicByName(req, res) {
 }
 
 async function createMusic(req, res) {
-  const { name, image, duration, file, album ,artist } = req.body;
+  const { name, image, duration, file, album, artist } = req.body;
   try {
     await pool.query(
       "INSERT INTO musics (name, image, duration, file, album_id, artist_id) VALUES ($1, $2, $3, $4, $5, $6)",
@@ -67,7 +67,7 @@ async function createMusic(req, res) {
 }
 
 async function updateMusic(req, res) {
-  const { name, image, duration, file , album , artist } = req.body;
+  const { name, image, duration, file, album, artist } = req.body;
   try {
     const { id } = req.params;
     await pool.query(
