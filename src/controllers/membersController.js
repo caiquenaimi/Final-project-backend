@@ -17,8 +17,8 @@ async function getMemberByName(req, res) {
   const { name } = req.params;
   try {
     const result = await pool.query(
-      `SELECT * FROM members WHERE name LIKE $1`,
-      [`%${name}%`]
+      `SELECT * FROM members WHERE LOWER(name) LIKE $1`,
+      [`%${name.toLowerCase()}%`]
     );
     res.json({
       total: result.rows.length,
