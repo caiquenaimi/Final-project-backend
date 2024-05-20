@@ -6,7 +6,7 @@ CREATE TABLE musics (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     image VARCHAR(100),
-    duration DECIMAL(2,10) NOT NULL,
+    duration DECIMAL(5,2)  NOT NULL,
     file VARCHAR(100) NOT NULL,
     album VARCHAR(100) NOT NULL,
     artist VARCHAR(100) NOT NULL
@@ -23,7 +23,7 @@ CREATE TABLE playlists (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
-    duration DECIMAL(2,10) NOT NULL,
+    duration DECIMAL(5,2),
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -34,4 +34,12 @@ CREATE TABLE members (
     description TEXT NOT NULL,
     birthdate DATE NOT NULL,
     image VARCHAR(100) 
+);
+
+CREATE TABLE playlist_music (
+    id SERIAL PRIMARY KEY,
+    playlist_id INT NOT NULL,
+    music_id INT NOT NULL,
+    FOREIGN KEY (playlist_id) REFERENCES playlists(id),
+    FOREIGN KEY (music_id) REFERENCES musics(id)
 );
