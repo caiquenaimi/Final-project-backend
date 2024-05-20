@@ -3,13 +3,19 @@ const pool = require("../config/dbConfig");
 async function getAllMembers(req, res) {
   try {
     const result = await pool.query(`SELECT * FROM members`);
+
     res.json({
-      total: result.rows.length,
-      data: result.rows,
+      status: "success",
+      message: "All members",
+      quantity: result.rowCount,
+      members: result.rows,
     });
   } catch (error) {
-    console.error("Error get all member", error);
-    res.status(500).json({ error: error.message });
+    console.error("Erro ao obter membros", error);
+    res.status(500).json({
+      status: "error",
+      message: "Erro ao obter membros",
+    });
   }
 }
 
@@ -20,13 +26,23 @@ async function getMemberByName(req, res) {
       `SELECT * FROM members WHERE LOWER(name) LIKE $1`,
       [`%${name.toLowerCase()}%`]
     );
+    if (result.rowCount === 0) {
+      res.json({
+        status: "error",
+        message: `Member with name ${name} not found`,
+      });
+    }
     res.json({
-      total: result.rows.length,
-      data: result.rows,
+      status: "success",
+      message: "Member found",
+      member: result.rows,
     });
   } catch (error) {
-    console.error("Error get member by name", error);
-    res.status(500).json({ error: error.message });
+    console.error("Erro ao obter musica", error);
+    res.status(500).json({
+      status: "error",
+      message: "Erro ao obter musica",
+    });
   }
 }
 
@@ -39,8 +55,11 @@ async function createMember(req, res) {
     );
     res.status(201).json({ message: "Member created successfully" });
   } catch (error) {
-    console.error("Error create member", error);
-    res.status(500).json({ error: error.message });
+    console.error("Erro ao criar membro", error);
+    res.status(500).json({
+      status: "error",
+      message: "Erro ao criar membro",
+    });
   }
 }
 
@@ -53,10 +72,16 @@ async function updateMember(req, res) {
       `UPDATE members SET name = $1, description = $2, birthdate = $3, image = $4 WHERE id = $5`,
       [name, description, birthdate, image, id]
     );
-    res.json({ message: "Member updated successfully" });
+    res.json({
+      status: "success",
+      message: "Member updated successfully",
+    });
   } catch (error) {
     console.error("Error update member", error);
-    res.status(500).json({ error: error.message });
+    res.status(500).json({
+      status: "error",
+      message: "Error update member",
+    });
   }
 }
 
@@ -65,10 +90,16 @@ async function deleteMember(req, res) {
 
   try {
     await pool.query(`DELETE FROM members WHERE id = $1`, [id]);
-    res.json({ message: "Member deleted successfully" });
+    res.json({
+      status: "success",
+      message: `Member with id ${id} deleted successfully`,
+    });
   } catch (error) {
     console.error("Error delete member", error);
-    res.status(500).json({ error: error.message });
+    res.status(500).json({
+      status: "error",
+      message: "Error delete member",
+    });
   }
 }
 
