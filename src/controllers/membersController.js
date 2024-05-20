@@ -53,7 +53,10 @@ async function createMember(req, res) {
       `INSERT INTO members (name, description, birthdate, image) VALUES ($1, $2, $3, $4)`,
       [name, description, birthdate, image]
     );
-    res.status(201).json({ message: "Member created successfully" });
+    res.status(201).json({
+      status: "success",
+      message: "Member created successfully",
+    });
   } catch (error) {
     console.error("Erro ao criar membro", error);
     res.status(500).json({
