@@ -1,4 +1,8 @@
 const pool = require("../config/dbConfig");
+const hash = require("bcrypt");
+const { sign } = require("jsonwebtoken");
+const dayjs = require("dayjs");
+
 
 async function getAllUsers(req, res) {
   try {
@@ -44,11 +48,12 @@ async function getUserByName(req, res) {
 }
 
 async function createUser(req, res) {
+  const { name, email, password } = req.body;
   try {
-    const { name, email, password } = req.body;
+    const passwordHash = await hash.hash(password, 8);
     await pool.query(
       "INSERT INTO users (name, email, password) VALUES ($1, $2, $3)",
-      [name, email, password]
+      [name, email, passwordHash]
     );
     res.status(201).json({
       status: "success",
@@ -68,9 +73,10 @@ async function updateUser(req, res) {
   const { name, email, password } = req.body;
 
   try {
+    const passwordHash = await hash.hash(password, 8);
     await pool.query(
       "UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4",
-      [name, email, password, id]
+      [name, email, passwordHash, id]
     );
     res.status(200).json({
       status: "success",
@@ -91,6 +97,69 @@ async function deleteUser(req, res) {
     res.status(500).json({ error: error.message });
   }
 }
+
+async function getUserById(req, res) {
+  const { id } = req.params;
+
+  try {
+    const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    if (result.rowCount === 0) {
+      res.status(404).json({ message: "Usuário não encontrado" });
+    }
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+async function getUserByEmail(req, res) {
+  const { email } = req.params;
+
+  try {
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+    if (result.rowCount === 0) {
+      res.status(404).json({ message: "Usuário não encontrado" });
+    }
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+async function loginUser(req, res){
+  try {
+    const { name, email, password } = req.body;
+    const user = await pool.query(
+      "SELECT * FROM users WHERE email = $1 AND password = $2",
+      [email, password]
+    );
+    if (user.rowCount === 0) {
+      res.status(404).json({ message: "Usuário não encontrado" });
+    }
+    const userAlreadyExists = await pool.query( 
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
+
+    if (userAlreadyExists.rowCount === 0) {
+      res.status(404).json({ message: "Usuário já existe" });
+    }
+
+    const passwordMatch = await hash.compare(password, user.rows[0].password);
+
+    if (!passwordMatch) {
+      res.status(401).json({ message: "Senha incorreta" });
+  }
+  const token = sign({}, "d2093a95-ed12-46fb-9bb4-8c16d28e6013", {
+    subject: user.rows[0].id,
+    expiresIn: "5m",
+  });
+  
+    
+
+
 
 module.exports = {
   getAllUsers,
