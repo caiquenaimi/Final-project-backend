@@ -2,6 +2,7 @@ const pool = require("../config/dbConfig");
 const hash = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const dayjs = require("dayjs");
+const crypto = require('crypto');
 
 
 async function getAllUsers(req, res) {
@@ -157,7 +158,21 @@ async function loginUser(req, res){
     expiresIn: "5m",
   });
   
-    
+  // expirar o login depois de 14 dias e ser obrigado a logar novamente
+  const expiresIn = dayjs().add(14, "day").unix();
+  const generateToken = () => {
+    return crypto.randomBytes(15).toString('hex');
+  }
+  const generatertoken = generateToken();
+  const generateRefreshToken = await pool.query('INSERT INTO rtoken (rtoken, expires, user_id) VALUES ($1, $2, $3) RETURNING *', [generatertoken, expiresIn, user.rows[0].id]);
+  return res.status(200).json({
+    token,
+    refreshToken: generateRefreshToken.rows[0].rtoken,
+  })}
+  catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
 
 
