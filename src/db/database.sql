@@ -19,6 +19,13 @@ CREATE TABLE users (
     password VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE rtoken (
+    rtoken VARCHAR(100) NOT NULL PRIMARY KEY,
+    expires INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 CREATE TABLE playlists (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
