@@ -16,7 +16,9 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL
+    password VARCHAR(100) NOT NULL,
+    birthdate DATE NOT NULL,
+    age INT
 );
 
 CREATE TABLE rtoken (
@@ -40,7 +42,7 @@ CREATE TABLE members (
     name VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     birthdate DATE NOT NULL,
-    image VARCHAR(100) 
+    image VARCHAR(100)
 );
 
 CREATE TABLE playlist_music (

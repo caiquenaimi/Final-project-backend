@@ -2,8 +2,7 @@ const pool = require("../config/dbConfig");
 const hash = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const dayjs = require("dayjs");
-const crypto = require('crypto');
-
+const crypto = require("crypto");
 
 async function getAllUsers(req, res) {
   try {
@@ -49,12 +48,17 @@ async function getUserByName(req, res) {
 }
 
 async function createUser(req, res) {
-  const { name, email, password } = req.body;
+  const { name, email, password, birthdate } = req.body;
+
+  const today = new Date();
+  const birthdateDate = new Date(birthdate);
+  const age = today.getFullYear() - birthdateDate.getFullYear();
+
   try {
     const passwordHash = await hash.hash(password, 8);
     await pool.query(
-      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3)",
-      [name, email, passwordHash]
+      "INSERT INTO users (name, email, password, birthdate, age) VALUES ($1, $2, $3, $4, $5)",
+      [name, email, passwordHash, birthdate, age]
     );
     res.status(201).json({
       status: "success",
@@ -71,13 +75,17 @@ async function createUser(req, res) {
 
 async function updateUser(req, res) {
   const { id } = req.params;
-  const { name, email, password } = req.body;
+  const { name, email, password, birthdate } = req.body;
+
+  const today = new Date();
+  const birthdateDate = new Date(birthdate);
+  const age = today.getFullYear() - birthdateDate.getFullYear();
 
   try {
     const passwordHash = await hash.hash(password, 8);
     await pool.query(
-      "UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4",
-      [name, email, passwordHash, id]
+      "UPDATE users SET name = $1, email = $2, password = $3, birthdate = $4, age = $5 WHERE id = $6",
+      [name, email, passwordHash, birthdate, age, id]
     );
     res.status(200).json({
       status: "success",
@@ -129,7 +137,7 @@ async function getUserByEmail(req, res) {
   }
 }
 
-async function loginUser(req, res){
+async function loginUser(req, res) {
   try {
     const { name, email, password } = req.body;
     const user = await pool.query(
@@ -139,7 +147,7 @@ async function loginUser(req, res){
     if (user.rowCount === 0) {
       res.status(404).json({ message: "Usuário não encontrado" });
     }
-    const userAlreadyExists = await pool.query( 
+    const userAlreadyExists = await pool.query(
       "SELECT * FROM users WHERE email = $1",
       [email]
     );
@@ -152,29 +160,30 @@ async function loginUser(req, res){
 
     if (!passwordMatch) {
       res.status(401).json({ message: "Senha incorreta" });
-  }
-  const token = sign({}, "d2093a95-ed12-46fb-9bb4-8c16d28e6013", {
-    subject: user.rows[0].id,
-    expiresIn: "5m",
-  });
-  
-  // expirar o login depois de 14 dias e ser obrigado a logar novamente
-  const expiresIn = dayjs().add(14, "day").unix();
-  const generateToken = () => {
-    return crypto.randomBytes(15).toString('hex');
-  }
-  const generatertoken = generateToken();
-  const generateRefreshToken = await pool.query('INSERT INTO rtoken (rtoken, expires, user_id) VALUES ($1, $2, $3) RETURNING *', [generatertoken, expiresIn, user.rows[0].id]);
-  return res.status(200).json({
-    token,
-    refreshToken: generateRefreshToken.rows[0].rtoken,
-  })}
-  catch (error) {
+    }
+    const token = sign({}, "d2093a95-ed12-46fb-9bb4-8c16d28e6013", {
+      subject: user.rows[0].id,
+      expiresIn: "5m",
+    });
+
+    // expirar o login depois de 14 dias e ser obrigado a logar novamente
+    const expiresIn = dayjs().add(14, "day").unix();
+    const generateToken = () => {
+      return crypto.randomBytes(15).toString("hex");
+    };
+    const generatertoken = generateToken();
+    const generateRefreshToken = await pool.query(
+      "INSERT INTO rtoken (rtoken, expires, user_id) VALUES ($1, $2, $3) RETURNING *",
+      [generatertoken, expiresIn, user.rows[0].id]
+    );
+    return res.status(200).json({
+      token,
+      refreshToken: generateRefreshToken.rows[0].rtoken,
+    });
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
-
-
 
 module.exports = {
   getAllUsers,
@@ -184,5 +193,5 @@ module.exports = {
   deleteUser,
   getUserById,
   getUserByEmail,
-  loginUser
+  loginUser,
 };
