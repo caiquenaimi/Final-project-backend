@@ -2,6 +2,7 @@ const pool = require("../config/dbConfig");
 const hash = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const dayjs = require("dayjs");
+const bcrypt = require("bcrypt")
 const crypto = require("crypto");
 
 async function getAllUsers(req, res) {
@@ -48,17 +49,17 @@ async function getUserByName(req, res) {
 }
 
 async function createUser(req, res) {
-  const { name, email, password, birthdate } = req.body;
+  let { name, email, password, birthdate } = req.body;
 
   const today = new Date();
   const birthdateDate = new Date(birthdate);
   const age = today.getFullYear() - birthdateDate.getFullYear();
 
   try {
-    const passwordHash = await hash.hash(password, 8);
+    password = await bcrypt.hash(password, 8)
     await pool.query(
       "INSERT INTO users (name, email, password, birthdate, age) VALUES ($1, $2, $3, $4, $5)",
-      [name, email, passwordHash, birthdate, age]
+      [name, email, password, birthdate, age]
     );
     res.status(201).json({
       status: "success",
@@ -75,17 +76,17 @@ async function createUser(req, res) {
 
 async function updateUser(req, res) {
   const { id } = req.params;
-  const { name, email, password, birthdate } = req.body;
+  let { name, email, password, birthdate } = req.body;
 
   const today = new Date();
   const birthdateDate = new Date(birthdate);
   const age = today.getFullYear() - birthdateDate.getFullYear();
 
   try {
-    const passwordHash = await hash.hash(password, 8);
+    password = await bcrypt.hash(password, 8)
     await pool.query(
       "UPDATE users SET name = $1, email = $2, password = $3, birthdate = $4, age = $5 WHERE id = $6",
-      [name, email, passwordHash, birthdate, age, id]
+      [name, email, password, birthdate, age, id]
     );
     res.status(200).json({
       status: "success",
