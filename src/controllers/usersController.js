@@ -72,6 +72,57 @@ async function createUser(req, res) {
       message: "Erro ao criar usuário",
     });
   }
+  console.log('Password before hash:', password);
+
+}
+
+
+
+async function loginUser(req, res) {
+  
+  try {
+    const { email, password } = req.body;
+    const userQuery = await pool.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
+
+    if (userQuery.rowCount === 0) {
+      return res.status(404).json({ message: "Usuário não encontrado" });
+    }
+
+    const user = userQuery.rows[0];
+    const userId = user.id.toString();
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    console.log('Password match:', passwordMatch);
+    if (!passwordMatch) {
+      return res.status(401).json({ message: "Senha incorreta" });
+    }
+
+    const token = sign({}, "d2093a95-ed12-46fb-9bb4-8c16d28e6013", {
+      subject: userId,
+      expiresIn: "5m",
+    });
+
+    // expirar o login depois de 14 dias e ser obrigado a logar novamente
+    const expiresIn = dayjs().add(14, "day").unix();
+    const generateToken = () => {
+      return crypto.randomBytes(15).toString("hex");
+    };
+    const generatertoken = generateToken();
+    const generateRefreshToken = await pool.query(
+      "INSERT INTO rtoken (rtoken, expires, user_id) VALUES ($1, $2, $3) RETURNING *",
+      [generatertoken, expiresIn, user.id]
+    );
+
+    return res.status(200).json({
+      token,
+      refreshToken: generateRefreshToken.rows[0].rtoken,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 }
 
 async function updateUser(req, res) {
@@ -138,53 +189,6 @@ async function getUserByEmail(req, res) {
   }
 }
 
-async function loginUser(req, res) {
-  try {
-    const { name, email, password } = req.body;
-    const user = await pool.query(
-      "SELECT * FROM users WHERE email = $1 AND password = $2",
-      [email, password]
-    );
-    if (user.rowCount === 0) {
-      res.status(404).json({ message: "Usuário não encontrado" });
-    }
-    const userAlreadyExists = await pool.query(
-      "SELECT * FROM users WHERE email = $1",
-      [email]
-    );
-
-    if (userAlreadyExists.rowCount === 0) {
-      res.status(404).json({ message: "Usuário já existe" });
-    }
-
-    const passwordMatch = await hash.compare(password, user.rows[0].password);
-
-    if (!passwordMatch) {
-      res.status(401).json({ message: "Senha incorreta" });
-    }
-    const token = sign({}, "d2093a95-ed12-46fb-9bb4-8c16d28e6013", {
-      subject: user.rows[0].id,
-      expiresIn: "5m",
-    });
-
-    // expirar o login depois de 14 dias e ser obrigado a logar novamente
-    const expiresIn = dayjs().add(14, "day").unix();
-    const generateToken = () => {
-      return crypto.randomBytes(15).toString("hex");
-    };
-    const generatertoken = generateToken();
-    const generateRefreshToken = await pool.query(
-      "INSERT INTO rtoken (rtoken, expires, user_id) VALUES ($1, $2, $3) RETURNING *",
-      [generatertoken, expiresIn, user.rows[0].id]
-    );
-    return res.status(200).json({
-      token,
-      refreshToken: generateRefreshToken.rows[0].rtoken,
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-}
 
 module.exports = {
   getAllUsers,
