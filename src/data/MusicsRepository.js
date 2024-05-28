@@ -1,7 +1,7 @@
-import Music from "./Musics";
-import { musicsMocked } from "./Musics";
+const Music = require("./Musics");
+const musicsMocked = require("./MusicsMocked");
 
-export default class MusicsRepository {
+ class MusicsRepository {
   constructor() {
     this.musicsList = [];
     const musics = musicsMocked.map((music) => {
@@ -64,3 +64,5 @@ export default class MusicsRepository {
     }
   }
 }
+
+module.exports = MusicsRepository;

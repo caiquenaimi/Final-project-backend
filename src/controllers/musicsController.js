@@ -1,14 +1,17 @@
 const pool = require("../config/dbConfig");
 const musicModel = require("../models/musicModel");
+const MusicRepository = require("../data/MusicsRepository");
+
+const musicsRepository = new MusicRepository();
 
 async function getAllMusics(req, res) {
   try {
-    const result = await pool.query("SELECT * FROM musics");
+    const musics = musicsRepository.getMusics();
     res.status(200).json({
       status: "success",
       message: "Lista de músicas",
-      quantity: result.rowCount,
-      musics: result.rows,
+      quantity: musics.length,
+      musics: musics,
     });
   } catch (error) {
     console.error("Erro ao buscar músicas", error);
@@ -104,13 +107,12 @@ async function deleteMusic(req, res) {
   }
 }
 
-
 async function addMusicToPlaylist(req, res) {
   const { playlistId, musicId } = req.body;
 
   try {
     await musicModel.addMusicToPlaylist(playlistId, musicId);
-    res.status(201).json({ message: 'Music added to playlist successfully' });
+    res.status(201).json({ message: "Music added to playlist successfully" });
   } catch (error) {
     console.error("Error adding music to playlist:", error);
     res.status(500).json({ error: error.message });
@@ -121,8 +123,9 @@ async function removeMusicFromPlaylist(req, res) {
   const { playlistId, id } = req.params;
   try {
     await musicModel.removeMusicFromPlaylist(playlistId, id);
-    res.status(200).json({ message: 'Music removed from playlist successfully' }
-    ); 
+    res
+      .status(200)
+      .json({ message: "Music removed from playlist successfully" });
   } catch (error) {
     console.error("Error removing music from playlist:", error);
     res.status(500).json({ error: error.message });
