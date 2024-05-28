@@ -16,6 +16,30 @@ const musicsMocked = [
     artist: "Matuê",
   },
   {
+    name: "777-666",
+    image: "https://i.imgur.com/KhlzAL1.jpg",
+    duration: 164,
+    file: "777-666.MP3",
+    album: "Máquina do Tempo",
+    artist: "Matuê",
+  },
+  {
+    name: "Gorila Roxo",
+    image: "https://i.imgur.com/KhlzAL1.jpg",
+    duration: 165,
+    file: "gorilaroxo.MP3",
+    album: "Máquina do Tempo",
+    artist: "Matuê",
+  },
+  {
+    name: "É sal",
+    image: "https://i.imgur.com/KhlzAL1.jpg",
+    duration: 157,
+    file: "sal.MP3",
+    album: "Máquina do Tempo",
+    artist: "Matuê",
+  },
+  {
     name: "Fim de Semana no Rio",
     image: "https://i.imgur.com/T9wlD9Q.jpg",
     duration: 199,
@@ -47,14 +71,7 @@ const musicsMocked = [
     album: "M4",
     artist: "Teto",
   },
-  {
-    name: "777-666",
-    image: "https://i.imgur.com/KhlzAL1.jpg",
-    duration: 164,
-    file: "777-666.MP3",
-    album: "Máquina do Tempo",
-    artist: "Matuê",
-  },
+
   {
     name: "Manha",
     image: "https://i.imgur.com/CiZXVmH.jpg",
@@ -64,13 +81,14 @@ const musicsMocked = [
     artist: "Teto",
   },
   {
-    name: "Gorila Roxo",
-    image: "https://i.imgur.com/KhlzAL1.jpg",
-    duration: 165,
-    file: "gorilaroxo.MP3",
-    album: "Máquina do Tempo",
-    artist: "Matuê",
+    name: "Paypal",
+    image: "https://i.imgur.com/CiZXVmH.jpg",
+    duration: 166,
+    file: "paypal.MP3",
+    album: "Prévias.zip",
+    artist: "Teto",
   },
+
   {
     name: "Lama no Copo",
     image: "https://i.imgur.com/KnjRP9I.jpg",
@@ -127,14 +145,7 @@ const musicsMocked = [
     album: "Vampiro",
     artist: "Matuê, Teto, Wiu",
   },
-  {
-    name: "É sal",
-    image: "https://i.imgur.com/KhlzAL1.jpg",
-    duration: 157,
-    file: "sal.MP3",
-    album: "Máquina do Tempo",
-    artist: "Matuê",
-  },
+
   {
     name: "Problemas de um Milionário",
     image: "https://i.imgur.com/S6MiLJU.jpg",
@@ -151,14 +162,7 @@ const musicsMocked = [
     album: "Luxuria",
     artist: "Matuê, Xamã",
   },
-  {
-    name: "Paypal",
-    image: "https://i.imgur.com/CiZXVmH.jpg",
-    duration: 166,
-    file: "paypal.MP3",
-    album: "Prévias.zip",
-    artist: "Teto",
-  },
+
   {
     name: "Pick Up The Phone",
     image: "",
