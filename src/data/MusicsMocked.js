@@ -137,7 +137,7 @@ const musicsMocked = [
   },
   {
     name: "Problemas de um Milionário",
-    image: "hhttps://i.imgur.com/S6MiLJU.jpg",
+    image: "https://i.imgur.com/S6MiLJU.jpg",
     duration: 155,
     file: "problemas.MP3",
     album: "Problemas de um Milionário",
