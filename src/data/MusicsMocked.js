@@ -488,6 +488,203 @@ const musicsMocked = [
     album: "4L",
     artist: "Yeat",
   },
+  {
+    name: "7 novinha pra 2 mlk",
+    image: "https://i.imgur.com/qd21lzW.jpg",
+    duration: 181,
+    album: "Trap The Fato Deluxe",
+    artist: "Derek, Emitê Emitê Único, Senndy"
+},
+{
+    name: "Atrás de Tu",
+    image: "https://i.imgur.com/cSmZFJw.jpg",
+    duration: 183,
+    album: "EL DEREK",
+    artist: "Derek, The boy"
+},
+{
+    name: "Bandana 2",
+    image: "https://i.imgur.com/Td3iAsH.jpg",
+    duration: 133,
+    album: "Dos Prédios",
+    artist: "Veigh, Yunk Vino"
+},
+{
+    name: "BARRAS & BARRAS",
+    image: "https://i.imgur.com/B3TjBJl.jpg",
+    duration: 218,
+    album: "Trap The Fato",
+    artist: "Derek, Tchelo"
+},
+{
+    name: "BOLSA DE OMBRO",
+    image: "https://i.imgur.com/gkr4JJB.jpg",
+    duration: 114,
+    album: "Dos Prédios Deluxe",
+    artist: "Veigh, G.A"
+},
+{
+    name: "Bonde da Fumaça",
+    image: "https://i.imgur.com/JWOz9zl.jpg",
+    duration: 252,
+    album: "Calzone Tapes, Vol 3",
+    artist: "Derek, Dfideliz, Jé Santiago, Mc Igu"
+},
+{
+    name: "Chapa-Quente",
+    image: "https://i.imgur.com/Td3iAsH.jpg",
+    duration: 205,
+    album: "Dos Prédios",
+    artist: "Veigh"
+},
+{
+    name: "DEVOLVE AS CORRENTES/INVISÍVEL",
+    image: "https://i.imgur.com/gkr4JJB.jpg",
+    duration: 200,
+    album: "Dos Prédios Deluxe",
+    artist: "Veigh"
+},
+{
+    name: "ENGANA DIZENDO QUE AMA",
+    image: "https://i.imgur.com/gkr4JJB.jpg",
+    duration: 188,
+    album: "Dos Prédios Deluxe",
+    artist: "Veigh, Tz da Coronel"
+},
+{
+    name: "Essa é a vida de um Gangsta 2",
+    image: "https://i.imgur.com/B3TjBJl.jpg",
+    duration: 160,
+    album: "Trap The Fato",
+    artist: "Derek"
+},
+{
+    name: "Essa Vadia Me Estiga",
+    image: "https://i.imgur.com/B3TjBJl.jpg",
+    duration: 192,
+    album: "Trap The Fato",
+    artist: "Derek"
+},
+{
+    name: "Eu só Deslizo",
+    image: "https://i.imgur.com/HAm0tkW.jpg",
+    duration: 241,
+    album: "Eu só Deslizo",
+    artist: "Derek, Dfideliz, Jé Santiago, Mc Igu"
+},
+{
+    name: "Foto do Corte",
+    image: "https://i.imgur.com/WcPMmqa.png",
+    duration: 177,
+    album: "Foto do Corte",
+    artist: "Veigh"
+},
+{
+    name: "HORA ERRADA",
+    image: "https://i.imgur.com/gkr4JJB.jpg",
+    duration: 210,
+    album: "Dos Prédios Deluxe",
+    artist: "Veigh, Caio Luccas"
+},
+{
+    name: "I Told U",
+    image: "https://i.imgur.com/cSmZFJw.jpg",
+    duration: 147,
+    album: "EL DEREK",
+    artist: "Derek"
+},
+{
+    name: "Jeito Bandido",
+    image: "https://i.imgur.com/Td3iAsH.jpg",
+    duration: 147,
+    album: "Dos Prédios",
+    artist: "Veigh, Kyan"
+},
+{
+    name: "Lean na Fanta",
+    image: "https://i.imgur.com/HAm0tkW.jpg",
+    duration: 200,
+    album: "Calzone Tapes, Vol 3",
+    artist: "Derek, Dfideliz, Jé Santiago, Mc Igu"
+},
+{
+    name: "Londres Freestyle",
+    image: "https://i.imgur.com/Td3iAsH.jpg",
+    duration: 128,
+    album: "Dos Prédios",
+    artist: "Veigh"
+},
+{
+    name: "Mandraka",
+    image: "https://i.imgur.com/Td3iAsH.jpg",
+    duration: 122,
+    album: "Dos Prédios",
+    artist: "Veigh"
+},
+{
+    name: "Meio Pa",
+    image: "https://i.imgur.com/Td3iAsH.jpg",
+    duration: 180,
+    album: "Dos Prédios",
+    artist: "Veigh, MC Luanna"
+},
+{
+    name: "Mlks de SP",
+    image: "https://i.imgur.com/5hhFunq.jpg",
+    duration: 196,
+    album: "Mlks de SP",
+    artist: "Derek, Dfideliz, Jé Santiago, Mc Igu"
+},
+{
+    name: "Nois é nois",
+    image: "https://i.imgur.com/4MU5UYZ.jpg",
+    duration: 120,
+    album: "Nois é Nois",
+    artist: "Veigh"
+},
+{
+    name: "Nóis ta Forgano",
+    image: "https://i.imgur.com/B3TjBJl.jpg",
+    duration: 165,
+    album: "Trap The Fato",
+    artist: "Derek, Kyan"
+},
+{
+    name: "Pérola",
+    image: "https://i.imgur.com/0rXBrn8.jpg",
+    duration: 114,
+    album: "Pérola",
+    artist: "Veigh"
+},
+{
+    name: "Resumo",
+    image: "https://i.imgur.com/wme0vtq.jpg",
+    duration: 244,
+    album: "Resumo",
+    artist: "Veigh, Danzo, Yunk Vino, Kyan"
+},
+{
+    name: "Scooby Doo",
+    image: "https://i.imgur.com/B3TjBJl.jpg",
+    duration: 212,
+    album: "Trap The Fato",
+    artist: "Derek, ABBOT"
+},
+{
+    name: "Vida Chique",
+    image: "https://i.imgur.com/Td3iAsH.jpg",
+    duration: 210,
+    album: "Dos Prédios",
+    artist: "Veigh, Kaash Paige"
+},
+{
+    name: "Vivências do Trap",
+    image: "https://i.imgur.com/qd21lzW.jpg",
+    duration: 163,
+    album: "Trap The Fato Deluxe",
+    artist: "Derek, Jé Santiago, Yunk Vino"
+}
+
 ];
 
 module.exports = musicsMocked;
