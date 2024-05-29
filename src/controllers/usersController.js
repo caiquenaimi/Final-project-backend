@@ -125,6 +125,41 @@ async function loginUser(req, res) {
   }
 }
 
+async function refreshToken(req, res) {
+  try {
+    const { refreshToken } = req.body;
+
+    const token = await pool.query('SELECT * FROM rtoken WHERE rtoken = $1', [refreshToken]);
+
+    if (!token.rows[0]) {
+      return res.status(404).send({ message: "Token inválido ou expirado" });
+    }
+
+    const newToken = sign({}, 'ao6Al-mR50ruM4-vq231Vs-gO418uibMe', {
+      subject: token.rows[0].token.toString(),
+      expiresIn: '15m'
+    });
+
+    return res.status(200).send({ token: newToken, refreshToken: token.rows[0] });
+  } catch (error) {
+    return res.status(500).send({ message: "Erro ao realizar refresh", error: error.message });
+  }
+};
+
+async function logOut (req, res) {
+  try {
+    const { refreshToken } = req.body;
+
+    await pool.query('DELETE FROM rtoken WHERE rtoken = $1', [refreshToken]);
+
+    return res.status(200).send({ message: "Usuário deslogado com sucesso" });
+  }
+  catch (error) {
+    return res.status(500).send({ message: "Erro ao deslogar", error: error.message });
+  }
+}
+
+
 async function updateUser(req, res) {
   const { id } = req.params;
   let { name, email, password, birthdate } = req.body;
@@ -199,4 +234,6 @@ module.exports = {
   getUserById,
   getUserByEmail,
   loginUser,
+  logOut,
+  refreshToken
 };
