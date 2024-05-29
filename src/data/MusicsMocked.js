@@ -492,6 +492,7 @@ const musicsMocked = [
     name: "7 novinha pra 2 mlk",
     image: "https://i.imgur.com/qd21lzW.jpg",
     duration: 181,
+    file:"7_novinha_pra_2_mlk.mp3",
     album: "Trap The Fato Deluxe",
     artist: "Derek, Emitê Emitê Único, Senndy"
 },
@@ -499,6 +500,7 @@ const musicsMocked = [
     name: "Atrás de Tu",
     image: "https://i.imgur.com/cSmZFJw.jpg",
     duration: 183,
+    file:"atras_de_tu.mp3",
     album: "EL DEREK",
     artist: "Derek, The boy"
 },
@@ -506,6 +508,7 @@ const musicsMocked = [
     name: "Bandana 2",
     image: "https://i.imgur.com/Td3iAsH.jpg",
     duration: 133,
+    file:"bandana.mp3",
     album: "Dos Prédios",
     artist: "Veigh, Yunk Vino"
 },
@@ -513,6 +516,7 @@ const musicsMocked = [
     name: "BARRAS & BARRAS",
     image: "https://i.imgur.com/B3TjBJl.jpg",
     duration: 218,
+    file:"barras_e_barras.mp3",
     album: "Trap The Fato",
     artist: "Derek, Tchelo"
 },
@@ -520,6 +524,7 @@ const musicsMocked = [
     name: "BOLSA DE OMBRO",
     image: "https://i.imgur.com/gkr4JJB.jpg",
     duration: 114,
+    file:"bolsa_de_ombro.mp3",
     album: "Dos Prédios Deluxe",
     artist: "Veigh, G.A"
 },
@@ -527,6 +532,7 @@ const musicsMocked = [
     name: "Bonde da Fumaça",
     image: "https://i.imgur.com/JWOz9zl.jpg",
     duration: 252,
+    file:"bonde_da_fumaca.mp3",
     album: "Calzone Tapes, Vol 3",
     artist: "Derek, Dfideliz, Jé Santiago, Mc Igu"
 },
@@ -534,6 +540,7 @@ const musicsMocked = [
     name: "Chapa-Quente",
     image: "https://i.imgur.com/Td3iAsH.jpg",
     duration: 205,
+    file:"chapa_quente.mp3",
     album: "Dos Prédios",
     artist: "Veigh"
 },
@@ -541,6 +548,7 @@ const musicsMocked = [
     name: "DEVOLVE AS CORRENTES/INVISÍVEL",
     image: "https://i.imgur.com/gkr4JJB.jpg",
     duration: 200,
+    file:"devolve_as_correntes.mp3",
     album: "Dos Prédios Deluxe",
     artist: "Veigh"
 },
@@ -548,6 +556,7 @@ const musicsMocked = [
     name: "ENGANA DIZENDO QUE AMA",
     image: "https://i.imgur.com/gkr4JJB.jpg",
     duration: 188,
+    file:"engana_dizendo_que_ama.mp3",
     album: "Dos Prédios Deluxe",
     artist: "Veigh, Tz da Coronel"
 },
@@ -555,6 +564,7 @@ const musicsMocked = [
     name: "Essa é a vida de um Gangsta 2",
     image: "https://i.imgur.com/B3TjBJl.jpg",
     duration: 160,
+    file:"essa_e_a_vida_de_um_gangsta.mp3",
     album: "Trap The Fato",
     artist: "Derek"
 },
@@ -562,6 +572,7 @@ const musicsMocked = [
     name: "Essa Vadia Me Estiga",
     image: "https://i.imgur.com/B3TjBJl.jpg",
     duration: 192,
+    file:"essa_vadia.mp3",
     album: "Trap The Fato",
     artist: "Derek"
 },
@@ -569,6 +580,7 @@ const musicsMocked = [
     name: "Eu só Deslizo",
     image: "https://i.imgur.com/HAm0tkW.jpg",
     duration: 241,
+    file:"eu_so_deslizo.mp3",
     album: "Eu só Deslizo",
     artist: "Derek, Dfideliz, Jé Santiago, Mc Igu"
 },
@@ -576,6 +588,7 @@ const musicsMocked = [
     name: "Foto do Corte",
     image: "https://i.imgur.com/WcPMmqa.png",
     duration: 177,
+    file:"foto_do_corte.mp3",
     album: "Foto do Corte",
     artist: "Veigh"
 },
@@ -583,6 +596,7 @@ const musicsMocked = [
     name: "HORA ERRADA",
     image: "https://i.imgur.com/gkr4JJB.jpg",
     duration: 210,
+    file:"hora_errada.mp3",
     album: "Dos Prédios Deluxe",
     artist: "Veigh, Caio Luccas"
 },
@@ -590,6 +604,7 @@ const musicsMocked = [
     name: "I Told U",
     image: "https://i.imgur.com/cSmZFJw.jpg",
     duration: 147,
+    file:"i_told_u.mp3",
     album: "EL DEREK",
     artist: "Derek"
 },
@@ -597,6 +612,7 @@ const musicsMocked = [
     name: "Jeito Bandido",
     image: "https://i.imgur.com/Td3iAsH.jpg",
     duration: 147,
+    file:"jeito_bandido.mp3",
     album: "Dos Prédios",
     artist: "Veigh, Kyan"
 },
@@ -604,6 +620,7 @@ const musicsMocked = [
     name: "Lean na Fanta",
     image: "https://i.imgur.com/HAm0tkW.jpg",
     duration: 200,
+    file:"lean_na_fanta.mp3",
     album: "Calzone Tapes, Vol 3",
     artist: "Derek, Dfideliz, Jé Santiago, Mc Igu"
 },
@@ -611,6 +628,7 @@ const musicsMocked = [
     name: "Londres Freestyle",
     image: "https://i.imgur.com/Td3iAsH.jpg",
     duration: 128,
+    file:"londres_freestyle.mp3",
     album: "Dos Prédios",
     artist: "Veigh"
 },
@@ -618,6 +636,7 @@ const musicsMocked = [
     name: "Mandraka",
     image: "https://i.imgur.com/Td3iAsH.jpg",
     duration: 122,
+    file:"mandraka.mp3",
     album: "Dos Prédios",
     artist: "Veigh"
 },
@@ -625,6 +644,7 @@ const musicsMocked = [
     name: "Meio Pa",
     image: "https://i.imgur.com/Td3iAsH.jpg",
     duration: 180,
+    file:"meio_pa.mp3",
     album: "Dos Prédios",
     artist: "Veigh, MC Luanna"
 },
@@ -632,6 +652,7 @@ const musicsMocked = [
     name: "Mlks de SP",
     image: "https://i.imgur.com/5hhFunq.jpg",
     duration: 196,
+    file:"mlks_de_sp.mp3",
     album: "Mlks de SP",
     artist: "Derek, Dfideliz, Jé Santiago, Mc Igu"
 },
@@ -639,6 +660,7 @@ const musicsMocked = [
     name: "Nois é nois",
     image: "https://i.imgur.com/4MU5UYZ.jpg",
     duration: 120,
+    file:"nois_e_nois.mp3",
     album: "Nois é Nois",
     artist: "Veigh"
 },
@@ -646,6 +668,7 @@ const musicsMocked = [
     name: "Nóis ta Forgano",
     image: "https://i.imgur.com/B3TjBJl.jpg",
     duration: 165,
+    file:"nois_ta_forgano.mp3",
     album: "Trap The Fato",
     artist: "Derek, Kyan"
 },
@@ -653,6 +676,7 @@ const musicsMocked = [
     name: "Pérola",
     image: "https://i.imgur.com/0rXBrn8.jpg",
     duration: 114,
+    file:"perola.mp3",
     album: "Pérola",
     artist: "Veigh"
 },
@@ -660,6 +684,7 @@ const musicsMocked = [
     name: "Resumo",
     image: "https://i.imgur.com/wme0vtq.jpg",
     duration: 244,
+    file:"resumo.mp3",
     album: "Resumo",
     artist: "Veigh, Danzo, Yunk Vino, Kyan"
 },
@@ -667,6 +692,7 @@ const musicsMocked = [
     name: "Scooby Doo",
     image: "https://i.imgur.com/B3TjBJl.jpg",
     duration: 212,
+    file:"scooby_doo.mp3",
     album: "Trap The Fato",
     artist: "Derek, ABBOT"
 },
@@ -674,6 +700,7 @@ const musicsMocked = [
     name: "Vida Chique",
     image: "https://i.imgur.com/Td3iAsH.jpg",
     duration: 210,
+    file:"vida_chique.mp3",
     album: "Dos Prédios",
     artist: "Veigh, Kaash Paige"
 },
@@ -681,6 +708,7 @@ const musicsMocked = [
     name: "Vivências do Trap",
     image: "https://i.imgur.com/qd21lzW.jpg",
     duration: 163,
+    file:"vivencias_do_trap.mp3",
     album: "Trap The Fato Deluxe",
     artist: "Derek, Jé Santiago, Yunk Vino"
 }
