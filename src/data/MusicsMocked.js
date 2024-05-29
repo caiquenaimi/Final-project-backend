@@ -162,7 +162,7 @@ const musicsMocked = [
   },
   {
     name: "Pick Up The Phone",
-    image: "",
+    image: "https://i.imgur.com/pL526Uz.png",
     duration: 236,
     file: "pick_up_the_phone.MP3",
     album: "Birds in the Trap Sing McKnight",
@@ -170,7 +170,7 @@ const musicsMocked = [
   },
   {
     name: "Goosebumps",
-    image: "",
+    image: "https://i.imgur.com/pL526Uz.png",
     duration: 243,
     file: "goosebumps.MP3",
     album: "Birds in the Trap Sing McKnight",
@@ -178,7 +178,7 @@ const musicsMocked = [
   },
   {
     name: "Fe!n",
-    image: "",
+    image: "https://i.imgur.com/dKPoLRI.png",
     duration: 193,
     file: "fein.MP3",
     album: "Utopia",
@@ -186,7 +186,7 @@ const musicsMocked = [
   },
   {
     name: "Butterfly Effect",
-    image: "",
+    image: "https://i.imgur.com/APexNOc.jpg",
     duration: 186,
     file: "butterfly_effect.MP3",
     album: "Astroworld",
@@ -194,7 +194,7 @@ const musicsMocked = [
   },
   {
     name: "Stargazing",
-    image: "",
+    image: "https://i.imgur.com/APexNOc.jpg",
     duration: 272,
     file: "stargazing.MP3",
     album: "Astroworld",
@@ -202,7 +202,7 @@ const musicsMocked = [
   },
   {
     name: "Sicko Mode",
-    image: "",
+    image: "https://i.imgur.com/APexNOc.jpg",
     duration: 314,
     file: "sicko_mode.MP3",
     album: "Astroworld",
@@ -210,15 +210,23 @@ const musicsMocked = [
   },
   {
     name: "Antidote",
-    image: "",
+    image: "https://i.imgur.com/OKwZAsH.jpg",
     duration: 262,
     file: "antidote.MP3",
     album: "Rodeo",
     artist: "Travis Scott",
   },
   {
+    name: "Nightcrawler",
+    album: "Rodeo",
+    duration: 322,
+    file: "nightcrawler.MP3",
+    image: "https://i.imgur.com/OKwZAsH.jpg",
+    artist: "Travis Scott, Swae Lee, Chief Keef",
+  },
+  {
     name: "Highest in the Room",
-    image: "",
+    image: "https://i.imgur.com/0U7qXEY.png",
     duration: 175,
     file: "highest_in_the_room.MP3",
     album: "Highest in the Room",
@@ -226,7 +234,7 @@ const musicsMocked = [
   },
   {
     name: "Out West",
-    image: "",
+    image: "https://i.imgur.com/uQlsBk5.jpg",
     duration: 159,
     file: "out_west.MP3",
     album: "JackBoys",
@@ -234,7 +242,7 @@ const musicsMocked = [
   },
   {
     name: "The Scotts",
-    image: "",
+    image: "https://i.imgur.com/5IvOHN9.jpg",
     duration: 167,
     file: "the_scotts.MP3",
     album: "The Scotts",
@@ -242,7 +250,7 @@ const musicsMocked = [
   },
   {
     name: "Trance",
-    image: "",
+    image: "https://i.imgur.com/brEzLqq.jpg",
     duration: 194,
     file: "trance.MP3",
     album: "Heroes & Villains",
@@ -250,7 +258,7 @@ const musicsMocked = [
   },
   {
     name: "Superhero",
-    image: "",
+    image: "https://i.imgur.com/brEzLqq.jpg",
     duration: 182,
     file: "superhero.MP3",
     album: "Heroes & Villains",
@@ -258,7 +266,7 @@ const musicsMocked = [
   },
   {
     name: "Too Many Nights",
-    image: "",
+    image: "https://i.imgur.com/brEzLqq.jpg",
     duration: 199,
     file: "too_many_nights.MP3",
     album: "Heroes & Villains",
@@ -266,7 +274,7 @@ const musicsMocked = [
   },
   {
     name: "Creepin",
-    image: "",
+    image: "https://i.imgur.com/brEzLqq.jpg",
     duration: 221,
     file: "creepin.MP3",
     album: "Heroes & Villains",
@@ -274,7 +282,7 @@ const musicsMocked = [
   },
   {
     name: "Niagara Falls",
-    image: "",
+    image: "https://i.imgur.com/brEzLqq.jpg",
     duration: 207,
     file: "niagara_falls.MP3",
     album: "Heroes & Villains",
@@ -282,7 +290,7 @@ const musicsMocked = [
   },
   {
     name: "Type Shit",
-    image: "",
+    image: "https://i.imgur.com/hUNeG0C.jpg",
     duration: 229,
     file: "type_shit.MP3",
     album: "We Don't Trust You",
@@ -290,7 +298,7 @@ const musicsMocked = [
   },
   {
     name: "Like That",
-    image: "",
+    image: "https://i.imgur.com/hUNeG0C.jpg",
     duration: 267,
     file: "like_that.MP3",
     album: "We Don't Trust You",
@@ -298,7 +306,7 @@ const musicsMocked = [
   },
   {
     name: "Glock in My Lap",
-    image: "",
+    image: "https://i.imgur.com/crpea4N.jpg",
     duration: 193,
     file: "glock_in_my_lap.MP3",
     album: "Savage Mode II",
@@ -306,7 +314,7 @@ const musicsMocked = [
   },
   {
     name: "Ghostface Killers",
-    image: "",
+    image: "https://i.imgur.com/ZHhbK94.jpg",
     duration: 269,
     file: "ghostface_killers.MP3",
     album: "Without Warning",
@@ -314,7 +322,7 @@ const musicsMocked = [
   },
   {
     name: "Ric Flair Drip",
-    image: "",
+    image: "https://i.imgur.com/ZHhbK94.jpg",
     duration: 172,
     file: "ric_flair_drip.MP3",
     album: "Without Warning",
