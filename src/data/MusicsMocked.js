@@ -99,7 +99,7 @@ const musicsMocked = [
   },
   {
     name: "Anos Luz",
-    image: "https://i.imgur.com/KhlzAL1.jpg",
+    image: "https://i.imgur.com/otiA3P6.jpg",
     duration: 264,
     file: "anosluz.MP3",
     album: "Máquina do Tempo",
@@ -123,7 +123,7 @@ const musicsMocked = [
   },
   {
     name: "Savana",
-    image: "https://i.imgur.com/ugsMqZc.jpg",
+    image: "https://i.imgur.com/MjuYYFW.jpg",
     duration: 166,
     file: "savana.MP3",
     album: "Savana",
