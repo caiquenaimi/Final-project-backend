@@ -162,7 +162,7 @@ const musicsMocked = [
   },
   {
     name: "Pick Up The Phone",
-    image: "https://i.imgur.com/pL526Uz.png",
+    image: "https://i.imgur.com/lE86pkm.jpg",
     duration: 236,
     file: "pick_up_the_phone.MP3",
     album: "Birds in the Trap Sing McKnight",
@@ -170,7 +170,7 @@ const musicsMocked = [
   },
   {
     name: "Goosebumps",
-    image: "https://i.imgur.com/pL526Uz.png",
+    image: "https://i.imgur.com/lE86pkm.jpg",
     duration: 243,
     file: "goosebumps.MP3",
     album: "Birds in the Trap Sing McKnight",
