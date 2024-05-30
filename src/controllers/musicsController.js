@@ -1,12 +1,10 @@
 const pool = require("../config/dbConfig");
 const musicModel = require("../models/musicModel");
-const MusicRepository = require("../data/MusicsRepository");
-
-const musicsRepository = new MusicRepository();
 
 async function getAllMusics(req, res) {
   try {
-    const musics = musicsRepository.getMusics();
+    const result = await pool.query("SELECT * FROM musics");
+    const musics = result.rows;
     res.status(200).json({
       status: "success",
       message: "Lista de músicas",

@@ -22,7 +22,7 @@ async function getPlaylistByName(req, res) {
   try {
     const { name } = req.params;
     const result = await pool.query(
-      "SELECT * FROM heroes WHERE LOWER(name) LIKE $1",
+      "SELECT * FROM playlists WHERE LOWER(name) LIKE $1",
       [`%${name.toLowerCase()}%`]
     );
     if (result.rowCount === 0) {
