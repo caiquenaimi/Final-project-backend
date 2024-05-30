@@ -119,6 +119,7 @@ async function loginUser(req, res) {
     return res.status(200).json({
       token,
       refreshToken: generateRefreshToken.rows[0].rtoken,
+      user: user
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });
