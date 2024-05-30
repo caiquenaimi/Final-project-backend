@@ -119,6 +119,7 @@ async function loginUser(req, res) {
     return res.status(200).json({
       token,
       refreshToken: generateRefreshToken.rows[0].rtoken,
+      user: user
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -132,7 +133,7 @@ async function refreshToken(req, res) {
     const token = await pool.query('SELECT * FROM rtoken WHERE rtoken = $1', [refreshToken]);
 
     if (!token.rows[0]) {
-      return res.status(404).send({ message: "Token inválido ou expirado" });
+      return res.status(404).send({ message: "Token inválido" });
     }
 
     const newToken = sign({}, 'ao6Al-mR50ruM4-vq231Vs-gO418uibMe', {
