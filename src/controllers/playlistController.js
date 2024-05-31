@@ -121,6 +121,22 @@ async function getPlaylistDetails(req, res) {
   }
 }
 
+async function addMusicToPlaylist(req, res){
+  const { playlistId, musicId } = req.body;
+
+  try {
+    await pool.query(
+      "INSERT INTO playlist_music (playlist_id, music_id) VALUES ($1, $2)",
+      [playlistId, musicId]
+    );
+    res.status(201).json({ message: "Music added to playlist successfully" });
+  } catch (error) {
+    console.error("Error adding music to playlist:", error);
+    res.status(500).json({ error: error.message });
+  }
+
+}
+
 module.exports = {
   getAllPlaylists,
   getPlaylistByName,
@@ -128,4 +144,5 @@ module.exports = {
   updatePlaylist,
   deletePlaylist,
   getPlaylistDetails,
+  addMusicToPlaylist,
 };
