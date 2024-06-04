@@ -45,7 +45,6 @@ async function getPlaylistByName(req, res) {
   }
 }
 
-
 async function createPlaylist(req, res) {
   const { name, description, duration, user_id } = req.body;
   try {
@@ -70,7 +69,10 @@ async function updatePlaylist(req, res) {
   try {
     const { name, description } = req.body;
     const { id } = req.params;
-    await pool.query("UPDATE playlists SET name = $1, description = $2 WHERE id = $3", [name, description, id]);
+    await pool.query(
+      "UPDATE playlists SET name = $1, description = $2 WHERE id = $3",
+      [name, description, id]
+    );
   } catch (error) {
     console.error("Erro ao atualizar playlist", error);
     res.status(500).json({
@@ -78,7 +80,7 @@ async function updatePlaylist(req, res) {
       message: "Erro ao atualizar playlist",
     });
   }
-};
+}
 
 async function deletePlaylist(req, res) {
   try {
@@ -100,6 +102,11 @@ async function deletePlaylist(req, res) {
 async function getPlaylistDetails(req, res) {
   const playlistId = req.params.playlistId;
 
+  // Verifique se playlistId é undefined ou nulo
+  if (!playlistId) {
+    return res.status(400).json({ error: "ID da playlist não foi fornecido" });
+  }
+
   try {
     const playlistResult = await pool.query(
       "SELECT * FROM playlists WHERE id = $1",
@@ -116,12 +123,12 @@ async function getPlaylistDetails(req, res) {
 
     res.status(200).json({ playlist, musics });
   } catch (error) {
-    console.error("Error getting playlist details:", error);
+    console.error("Erro ao obter detalhes da playlist:", error);
     res.status(500).json({ error: error.message });
   }
 }
 
-async function addMusicToPlaylist(req, res){
+async function addMusicToPlaylist(req, res) {
   const { playlistId, musicId } = req.body;
 
   try {
@@ -134,7 +141,6 @@ async function addMusicToPlaylist(req, res){
     console.error("Error adding music to playlist:", error);
     res.status(500).json({ error: error.message });
   }
-
 }
 
 module.exports = {

@@ -51,7 +51,7 @@ async function getMusicById(req, res) {
   try {
     const { id } = req.params;
 
-    if (!id) {
+    if (!id || isNaN(id)) {
       return res.status(400).json({
         status: "error",
         message: "ID parameter is missing or invalid",
