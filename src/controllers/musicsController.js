@@ -50,6 +50,14 @@ async function getMusicByName(req, res) {
 async function getMusicById(req, res) {
   try {
     const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        status: "error",
+        message: "ID parameter is missing or invalid",
+      });
+    }
+
     const result = await pool.query("SELECT * FROM musics WHERE id = $1", [id]);
     if (result.rowCount === 0) {
       return res.status(404).json({
@@ -60,7 +68,7 @@ async function getMusicById(req, res) {
     res.json({
       status: "success",
       message: "Música encontrada",
-      music: result.rows[0],  
+      music: result.rows[0],
     });
   } catch (error) {
     console.error("Erro ao buscar música", error);
