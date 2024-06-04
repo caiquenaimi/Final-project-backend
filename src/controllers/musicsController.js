@@ -52,7 +52,7 @@ async function getMusicById(req, res) {
     const { id } = req.params;
     const result = await pool.query("SELECT * FROM musics WHERE id = $1", [id]);
     if (result.rowCount === 0) {
-      res.json({
+      return res.status(404).json({
         status: "error",
         message: `Música com id ${id} não encontrada`,
       });
@@ -60,7 +60,7 @@ async function getMusicById(req, res) {
     res.json({
       status: "success",
       message: "Música encontrada",
-      music: result.rows,
+      music: result.rows[0],  
     });
   } catch (error) {
     console.error("Erro ao buscar música", error);
