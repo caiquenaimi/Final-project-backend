@@ -47,6 +47,30 @@ async function getMusicByName(req, res) {
   }
 }
 
+async function getMusicById(req, res) {
+  try {
+    const { id } = req.params;
+    const result = await pool.query("SELECT * FROM musics WHERE id = $1", [id]);
+    if (result.rowCount === 0) {
+      res.json({
+        status: "error",
+        message: `Música com id ${id} não encontrada`,
+      });
+    }
+    res.json({
+      status: "success",
+      message: "Música encontrada",
+      music: result.rows,
+    });
+  } catch (error) {
+    console.error("Erro ao buscar música", error);
+    res.status(500).send({
+      status: "error",
+      message: "Erro ao buscar música",
+    });
+  }
+}
+
 async function createMusic(req, res) {
   const { name, image, duration, file, album, artist } = req.body;
   try {
@@ -133,6 +157,7 @@ async function removeMusicFromPlaylist(req, res) {
 module.exports = {
   getAllMusics,
   getMusicByName,
+  getMusicById,
   createMusic,
   updateMusic,
   deleteMusic,
