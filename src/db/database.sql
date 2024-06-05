@@ -41,7 +41,6 @@ CREATE TABLE members (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
-    birthdate DATE NOT NULL,
     image VARCHAR(100)
 );
 
