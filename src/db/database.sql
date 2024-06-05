@@ -17,8 +17,6 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
-    birthdate DATE NOT NULL,
-    age INT
 );
 
 CREATE TABLE rtoken (
