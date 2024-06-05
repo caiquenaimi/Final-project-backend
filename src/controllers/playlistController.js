@@ -18,6 +18,28 @@ async function getAllPlaylists(req, res) {
   }
 }
 
+async function getPlaylistIndividuallyPerUser(req, res) {
+  try {
+    const { user_id } = req.params;
+    const result = await pool.query(
+      "SELECT * FROM playlists WHERE user_id = $1",
+      [user_id]
+    );
+    res.status(200).json({
+      status: "success",
+      message: "Lista de playlists",
+      quantity: result.rowCount,
+      playlists: result.rows,
+    });
+  } catch (error) {
+    console.error("Erro ao buscar playlists", error);
+    res.status(500).json({
+      status: "error",
+      message: "Erro ao buscar playlists",
+    });
+  }
+}
+
 async function getPlaylistByName(req, res) {
   try {
     const { name } = req.params;
@@ -143,12 +165,14 @@ async function addMusicToPlaylist(req, res) {
   }
 }
 
+
 module.exports = {
   getAllPlaylists,
+  getPlaylistIndividuallyPerUser,
   getPlaylistByName,
   createPlaylist,
   updatePlaylist,
   deletePlaylist,
   getPlaylistDetails,
-  addMusicToPlaylist,
+  addMusicToPlaylist
 };

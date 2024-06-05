@@ -138,7 +138,8 @@ async function deleteMusic(req, res) {
 }
 
 async function addMusicToPlaylist(req, res) {
-  const { playlistId, musicId } = req.body;
+  const { musicId } = req.body;
+  const { playlistId } = req.params;
 
   try {
     await musicModel.addMusicToPlaylist(playlistId, musicId);
