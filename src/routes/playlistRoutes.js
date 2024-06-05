@@ -3,8 +3,7 @@ const router = express.Router();
 const playlistController = require("../controllers/playlistController");
 
 router.get("/playlist", playlistController.getAllPlaylists);
-router.get("/playlist/:name", playlistController.getPlaylistByName);
-router.get("/playlist/user/:user_id", playlistController.getPlaylistIndividuallyPerUser);
+router.get("/playlist/:user_id", playlistController.getPlaylistIndividuallyPerUser);
 router.post("/playlist", playlistController.createPlaylist);
 router.put("/playlist/:id", playlistController.updatePlaylist);
 router.delete("/playlist/:id", playlistController.deletePlaylist);
