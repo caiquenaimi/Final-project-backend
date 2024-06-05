@@ -80,24 +80,38 @@ async function getMusicById(req, res) {
 }
 
 async function createMusic(req, res) {
-  const { name, image, duration, file, album, artist } = req.body;
+  const musics = req.body;
+
+  if (!Array.isArray(musics)) {
+    return res.status(400).json({
+      status: "error",
+      message: "O corpo da requisição deve ser um array de músicas",
+    });
+  }
+
   try {
-    await pool.query(
-      "INSERT INTO musics (name, image, duration, file, album, artist) VALUES ($1, $2, $3, $4, $5, $6)",
-      [name, image, duration, file, album, artist]
-    );
+    for (const music of musics) {
+      const { name, image, duration, file, album, artist } = music;
+
+      await pool.query(
+        "INSERT INTO musics (name, image, duration, file, album, artist) VALUES ($1, $2, $3, $4, $5, $6)",
+        [name, image, duration, file, album, artist]
+      );
+    }
+
     res.status(201).json({
       status: "success",
-      message: "Música criada com sucesso",
+      message: "Músicas criadas com sucesso",
     });
   } catch (error) {
-    console.error("Erro ao criar música", error);
+    console.error("Erro ao criar músicas", error);
     res.status(500).json({
       status: "error",
-      message: "Erro ao criar música",
+      message: "Erro ao criar músicas",
     });
   }
 }
+
 
 async function updateMusic(req, res) {
   const { name, image, duration, file, album, artist } = req.body;
