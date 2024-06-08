@@ -2,7 +2,7 @@ const pool = require("../config/dbConfig");
 const hash = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const dayjs = require("dayjs");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 
 async function getAllUsers(req, res) {
@@ -51,7 +51,7 @@ async function getUserByName(req, res) {
 async function createUser(req, res) {
   let { name, email, password } = req.body;
   try {
-    password = await bcrypt.hash(password, 8)
+    password = await bcrypt.hash(password, 8);
     await pool.query(
       "INSERT INTO users (name, email, password) VALUES ($1, $2, $3)",
       [name, email, password]
@@ -67,20 +67,15 @@ async function createUser(req, res) {
       message: "Erro ao criar usuário",
     });
   }
-  console.log('Password before hash:', password);
-
+  console.log("Password before hash:", password);
 }
 
-
-
 async function loginUser(req, res) {
-  
   try {
     const { email, password } = req.body;
-    const userQuery = await pool.query(
-      "SELECT * FROM users WHERE email = $1",
-      [email]
-    );
+    const userQuery = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
 
     if (userQuery.rowCount === 0) {
       return res.status(404).json({ message: "Usuário não encontrado" });
@@ -90,7 +85,7 @@ async function loginUser(req, res) {
     const userId = user.id.toString();
 
     const passwordMatch = await bcrypt.compare(password, user.password);
-    console.log('Password match:', passwordMatch);
+    console.log("Password match:", passwordMatch);
     if (!passwordMatch) {
       return res.status(401).json({ message: "Senha incorreta" });
     }
@@ -114,7 +109,7 @@ async function loginUser(req, res) {
     return res.status(200).json({
       token,
       refreshToken: generateRefreshToken.rows[0].rtoken,
-      user: user
+      user: user,
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -125,48 +120,52 @@ async function refreshToken(req, res) {
   try {
     const { refreshToken } = req.body;
 
-    const token = await pool.query('SELECT * FROM rtoken WHERE rtoken = $1', [refreshToken]);
+    const token = await pool.query("SELECT * FROM rtoken WHERE rtoken = $1", [
+      refreshToken,
+    ]);
 
     if (!token.rows[0]) {
       return res.status(404).send({ message: "Token inválido" });
     }
 
-    const newToken = sign({}, 'ao6Al-mR50ruM4-vq231Vs-gO418uibMe', {
+    const newToken = sign({}, "ao6Al-mR50ruM4-vq231Vs-gO418uibMe", {
       subject: token.rows[0].token.toString(),
-      expiresIn: '15m'
+      expiresIn: "15m",
     });
 
-    return res.status(200).send({ token: newToken, refreshToken: token.rows[0] });
+    return res
+      .status(200)
+      .send({ token: newToken, refreshToken: token.rows[0] });
   } catch (error) {
-    return res.status(500).send({ message: "Erro ao realizar refresh", error: error.message });
-  }
-};
-
-async function logOut (req, res) {
-  try {
-    const { refreshToken } = req.body;
-
-    await pool.query('DELETE FROM rtoken WHERE rtoken = $1', [refreshToken]);
-
-    return res.status(200).send({ message: "Usuário deslogado com sucesso" });
-  }
-  catch (error) {
-    return res.status(500).send({ message: "Erro ao deslogar", error: error.message });
+    return res
+      .status(500)
+      .send({ message: "Erro ao realizar refresh", error: error.message });
   }
 }
 
+async function logOut(req, res) {
+  try {
+    const { refreshToken } = req.body;
+
+    await pool.query("DELETE FROM rtoken WHERE rtoken = $1", [refreshToken]);
+
+    return res.status(200).send({ message: "Usuário deslogado com sucesso" });
+  } catch (error) {
+    return res
+      .status(500)
+      .send({ message: "Erro ao deslogar", error: error.message });
+  }
+}
 
 async function updateUser(req, res) {
   const { id } = req.params;
   let { name, email, password } = req.body;
 
-
-
   try {
-    password = await bcrypt.hash(password, 8)
+    password = await bcrypt.hash(password, 8);
     await pool.query(
-      "UPDATE users SET name = $1, email = $2, password = $3, WHERE id = $4",
-      [name, email, password, id]
+      "UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4",
+      [name, email, password, id] // Coloque os parâmetros em um array aqui
     );
     res.status(200).json({
       status: "success",
@@ -181,7 +180,10 @@ async function deleteUser(req, res) {
   const { id } = req.params;
 
   try {
+    await pool.query("DELETE FROM rtoken WHERE user_id = $1", [id]);
+
     await pool.query("DELETE FROM users WHERE id = $1", [id]);
+
     res.status(204).send(`Usuário com id ${id} deletado com sucesso`);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -218,7 +220,6 @@ async function getUserByEmail(req, res) {
   }
 }
 
-
 module.exports = {
   getAllUsers,
   getUserByName,
@@ -229,5 +230,5 @@ module.exports = {
   getUserByEmail,
   loginUser,
   logOut,
-  refreshToken
+  refreshToken,
 };
