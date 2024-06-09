@@ -162,17 +162,29 @@ async function updateUser(req, res) {
   let { name, email, password } = req.body;
 
   try {
-    password = await bcrypt.hash(password, 8);
-    await pool.query(
-      "UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4",
-      [name, email, password, id] // Coloque os parâmetros em um array aqui
+    if (password) {
+      password = await bcrypt.hash(password, 8);
+    }
+    const result = await pool.query(
+      `UPDATE users SET name = $1, email = $2, password = COALESCE($3, password) WHERE id = $4 RETURNING *`,
+      [name, email, password, id]
     );
+    if (result.rowCount === 0) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Usuário não encontrado" });
+    }
+    const updatedUser = result.rows[0];
+    console.log("Dados do usuário atualizado: ", updatedUser); // Adicione este log
     res.status(200).json({
       status: "success",
-      message: `Usuário ${name} atualizado com sucesso`,
+      user: updatedUser,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Erro ao atualizar usuário:", error);
+    res
+      .status(500)
+      .json({ status: "error", message: "Erro ao atualizar usuário" });
   }
 }
 
