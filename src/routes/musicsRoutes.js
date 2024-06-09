@@ -6,6 +6,7 @@ router.get("/musics", musicsController.getAllMusics);
 router.get("/musics/:name", musicsController.getMusicByName);
 router.get("/musics/:id/details", musicsController.getMusicById);
 router.post("/musics", musicsController.createMusic);
+router.put("/musics/:id/favorite", musicsController.updateMusicFavoriteStatus);
 router.put("/musics/:id", musicsController.updateMusic);
 router.delete("/musics/:id", musicsController.deleteMusic);
 router.post("/playlist/:playlistId/musics", musicsController.addMusicToPlaylist);

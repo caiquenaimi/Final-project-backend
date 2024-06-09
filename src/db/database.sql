@@ -9,7 +9,8 @@ CREATE TABLE musics (
     duration DECIMAL(5,2)  NOT NULL,
     file VARCHAR(100) NOT NULL,
     album VARCHAR(100) NOT NULL,
-    artist VARCHAR(100) NOT NULL
+    artist VARCHAR(100) NOT NULL,
+    favorite BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE users (

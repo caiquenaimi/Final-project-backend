@@ -19,6 +19,33 @@ async function getAllMusics(req, res) {
     });
   }
 }
+async function updateMusicFavoriteStatus(req, res) {
+  const { id } = req.params;
+  const { favorite } = req.body;
+
+  try {
+    const result = await pool.query(
+      "UPDATE musics SET favorite = $1 WHERE id = $2 RETURNING *",
+      [favorite, id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Música não encontrada" });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: `Música ${result.rows[0].name} atualizada com sucesso`,
+      music: result.rows[0],
+    });
+  } catch (error) {
+    console.error("Erro ao atualizar música", error);
+    res.status(500).json({
+      status: "error",
+      message: "Erro ao atualizar música",
+    });
+  }
+}
 
 async function getMusicByName(req, res) {
   try {
@@ -112,7 +139,6 @@ async function createMusic(req, res) {
   }
 }
 
-
 async function updateMusic(req, res) {
   const { name, image, duration, file, album, artist } = req.body;
   try {
@@ -182,6 +208,7 @@ module.exports = {
   getMusicByName,
   getMusicById,
   createMusic,
+  updateMusicFavoriteStatus,
   updateMusic,
   deleteMusic,
   addMusicToPlaylist,
