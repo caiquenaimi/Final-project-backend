@@ -113,3 +113,5 @@ INSERT INTO musics (name, image, duration, file, album, artist) VALUES
 ('Out The Way', 'https://i.imgur.com/PEDtL33.jpg', 158, 'out_the_way.mp3', 'Lyfe', 'Yeat'),
 ('Flawless', 'https://i.imgur.com/PEDtL33.jpg', 158, 'flawless.mp3', 'Lyfe', 'Yeat, Lil Uzi Vert'),
 ('Sorry Bout That', 'https://i.imgur.com/riCJyP9.jpg', 187, 'sorry_bout_that.mp3', '4L', 'Yeat');
+
+/* Optamos por fazer pelo post do insomnia por json */
